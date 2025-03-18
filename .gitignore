@@ -1,0 +1,6 @@
+data
+.ruff_cache/
+.venv/
+__pycache__
+*.ipynb
+.env
