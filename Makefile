@@ -16,6 +16,7 @@ setup:
 	$(PYTHON) -m venv $(VENV)
 	$(PIP) install --upgrade pip
 	$(PIP) install -r requirements.txt
+	$(PYTHON_VENV) -m nltk.downloader stopwords
 	@echo "Setup complete."
 
 # Build embeddings and vector database

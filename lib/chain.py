@@ -1,6 +1,7 @@
 import os
 import time
 from typing import Dict, List, Optional
+import traceback
 
 from langchain_core.runnables import RunnableLambda
 from langchain_core.output_parsers import JsonOutputParser

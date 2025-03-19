@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  rag-api:
+    build: .
+    ports:
+      - "8000:8000" 
+    volumes:
+      - .env:/app/.env
+    environment:
+      - AZURE_OPENAI_ENDPOINT=https://ai-proxy.lab.epam.com
+      - AZURE_OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    restart: unless-stopped
