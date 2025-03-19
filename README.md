@@ -34,26 +34,21 @@ This project implements a RAG system specifically designed to answer questions a
     ```bash
     touch .env
     ```
-    Add the following environment variables to your .env file:
+    Add the following environment variables to your .env file depending on the model you will use:
     ```bash
     AZURE_OPENAI_ENDPOINT=your_azure_openai_endpoint
     AZURE_OPENAI_API_KEY=your_azure_openai_api_key
     OPENAI_API_KEY=your_openai_api_key
     REPO_URL=https://github.com/vanna-ai/vanna
-    DEFAULT_MODEL=Azure GPT-4o-mini
+    DEFAULT_MODEL=OpenAI GPT-4o-mini
     ```
 3. Make the Makefile executable:
     ```bash
     chmod +x Makefile
     ```
-4. Run the setup and build process:
+4. Build and run the container with docker-compose:
     ```bash
-    make setup
-    make build
-    ```
-5. Start the API server:
-    ```bash
-    make start
+    docker-compose up --build
     ```
 ## Configuration
 The following environment variables are supported:
@@ -86,7 +81,7 @@ Ask a question about a GitHub repository.
 {
     "question": "What is this repository about?",
     "repo_url": "https://github.com/vanna-ai/vanna",
-    "model_name": "Azure GPT-4o-mini",
+    "model_name": "OpenAI GPT-4o-mini",
     "debug": false
 }
 ```
@@ -97,11 +92,11 @@ Ask a question about a GitHub repository.
     ```
 2. Use a different language model:
     ```bash
-    curl -X POST -H "Content-Type: application/json" -d '{"question": "What is this repository about?", "repo_url": "https://github.com/vanna-ai/vanna", "model_name": "gpt-4"}' http://localhost:8000/ask
+    curl -X POST -H "Content-Type: application/json" -d '{"question": "What is this repository about?", "repo_url": "https://github.com/vanna-ai/vanna", "model_name": "Azure GPT-4o-mini"}' http://localhost:8000/ask
     ```
 3. Enable debug mode:
     ```bash
-    curl -X POST -H "Content-Type: application/json" -d '{"question": "What is this repository about?", "repo_url": "https://github.com/vanna-ai/vanna", "debug": true}' http://localhost:8000/ask
+    curl -X POST -H "Content-Type: application/json" -d '{"question": "What vectordb is better for sql generation in the context of vanna?", "repo_url": "https://github.com/vanna-ai/vanna", "debug": true}' http://localhost:8000/ask
     ```
 
 ## Timing Statistics
@@ -119,7 +114,7 @@ These timings reflect the efficiency of using ChromaDB as the vector database an
     - ChromaDB is used for its lightweight design, suitable for smaller repository sizes.
     - Enables efficient semantic search and retrieval of documents.
 3. Language Model:
-    - Default model: Azure GPT-4 (gpt-4o-mini-2024-07-18)
+    - Default model: OpenAI GPT-4o-mini (gpt-4o-mini-2024-07-18)
     - Selected for its powerful capabilities in natural language understanding and generation.
 4. RAG System:
     - Combines both semantic search and keyword search for optimal retrieval.
@@ -128,7 +123,7 @@ These timings reflect the efficiency of using ChromaDB as the vector database an
 ## Why These Choices?
 - ChromaDB was selected over alternatives like FAISS or Weaviate due to its lightweight nature, which aligns well with the scale of typical GitHub repositories.
 - BAAI/bge-small-en-v1.5 embeddings were chosen after experimenting with several alternatives. They offer the best balance of accuracy and computational efficiency for this use case.
-- GPT-40-mini model provides cutting-edge NLP capabilities, making it an excellent choice for generating high-quality answers.
+- GPT-4o-mini model provides cutting-edge NLP capabilities, making it an excellent choice for generating high-quality answers.
 
 ## REST API Endpoints
 Request Body Parameters:
@@ -152,6 +147,28 @@ Key modifications and improvements include:
 - Adopting relevance check
 - Enhanced timing statistics
 - Improved overall system performance
+
+## Example questions
+- What is this repository about?
+- What vectordb is better for sql generation in the context of vanna?
+- How to setup vanna?
+- How to train vanna with SQL?
+- How to train vanna with documentation?
+- What is difference between RAG and Fine-Tuning in terms of vanna?
+- Why is SQL generation by AI useful in vanna?
+- Why to choose vanna?
+- What are the databases vanna can connect to?
+- Which LLM was considered the best for SQL in vanna?
+- What is the capital of France?
+- How can i connect a chromadb to vanna?
+- What is the difference between chromadb and qdrant in the context of vanna?
+- How does should_generate_chart function from vanna base works?
+- What are the env variables for test_vanna.py?
+- What kind of training data vanna has?
+- What are the returns for deepseek chat system_message function?
+
+
+
 
 
 
